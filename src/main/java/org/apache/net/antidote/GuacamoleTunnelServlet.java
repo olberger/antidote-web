@@ -31,6 +31,8 @@ public class GuacamoleTunnelServlet
         String devicePort = "";
         Integer width = 0;
         Integer height = 0;
+        String protocol = "ssh";
+        
         try {
             BufferedReader reader = request.getReader();
             String connectData = reader.readLine();
@@ -43,7 +45,16 @@ public class GuacamoleTunnelServlet
             devicePort = data[1];
             width = Integer.parseInt(data[2]);
             height = Integer.parseInt(data[3]);
-
+            if (data.length >= 5) {
+            	protocol = data[4];
+            	switch (protocol) {
+            	case "ssh":
+            	case "vnc":
+            		break;
+            	default:	
+            		log.info("Can not support protocol '" + protocol + "'. Keeping with default (ssh).");
+            	}
+            }
             reader.close();
         } catch (IOException e) {
             log.info("Problem getting device port " + e.getMessage());
@@ -54,7 +65,7 @@ public class GuacamoleTunnelServlet
         // Create configuration
         GuacamoleConfiguration guacConfig = new GuacamoleConfiguration();
         log.info("Incoming device port: " + devicePort);
-        guacConfig.setProtocol("ssh");
+        guacConfig.setProtocol(protocol);
         guacConfig.setParameter("hostname", deviceIP);
         guacConfig.setParameter("port", devicePort);
         guacConfig.setParameter("username", "antidote");
