@@ -608,7 +608,7 @@ function guacInit(endpoints) {
             }
             thisTerminal.guac.onclipboard = ingestStream
 
-            connectData = endpoints[i].Host + ";" + endpoints[i].Port + ";" + String(document.getElementById("myTabContent").offsetWidth) + ";" + String(document.getElementById("myTabContent").offsetHeight - 42 + ";" + "vnc");
+            connectData = endpoints[i].Host + ";" + "5900" + ";" + String(document.getElementById("myTabContent").offsetWidth) + ";" + String(document.getElementById("myTabContent").offsetHeight - 42 + ";" + "vnc");
             thisTerminal.guac.connect(connectData);
 
             thisTerminal.display.appendChild(thisTerminal.guac.getDisplay().getElement());
