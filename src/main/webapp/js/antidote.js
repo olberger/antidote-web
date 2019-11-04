@@ -474,6 +474,17 @@ function addTabs(endpoints) {
                 // MUST run this after tab content has been added to the DOM
                 guacInit(fullName, connectData)
 
+            } else if (pres.Type == "vnc") {
+
+                var newGuacDiv = document.createElement("DIV");
+                newGuacDiv.id = "display" + fullName
+                newTabContent.appendChild(newGuacDiv)
+                connectData = ep.Host + ";" + pres.Port + ";" + String(document.getElementById("myTabContent").offsetWidth) + ";" + String(document.getElementById("myTabContent").offsetHeight - 42 + ";" + "vnc");
+                document.getElementById("myTabContent").appendChild(newTabContent);
+
+                // MUST run this after tab content has been added to the DOM
+                guacInit(fullName, connectData)
+
             } else if (pres.Type == "http") {
 
                 var iframe = document.createElement('iframe');
