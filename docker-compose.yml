@@ -33,3 +33,7 @@ services:
       SYRINGE_FULL_REF: 1-m0w5c6xzceintfat-ns-webserver1
     ports:
       - "8090:8080"
+  desktop:
+    image: "olberger/antidote-utility-vnc"
+    ports:
+      - "5900:5900"
